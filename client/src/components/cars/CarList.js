@@ -8,7 +8,7 @@ export default function CarList({ setDetailsCarId }) {
   const getAllCars = () => {
     getCars().then(setCars);
   };
-
+  
   useEffect(() => {
     getAllCars();
   }, []);

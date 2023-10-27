@@ -32,7 +32,7 @@ public class CarController : ControllerBase
         Car car = _dbContext
             .Cars
             .Include(c => c.UserProfile)
-            .Include(c => c.Year)
+            // .Include(c => c.Year)
             .Include(c => c.Make)
             .Include(c => c.Model)
             .SingleOrDefault(c => c.Id == id);
