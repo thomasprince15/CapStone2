@@ -25,14 +25,15 @@ export default function CarDetails({ detailsCarId }) {
   }
   return (
     <>
+    console.log(car)
       <h2>Car Details</h2>
       <Card color="dark" inverse>
         <CardBody>
           <CardTitle tag="h4">{car.make}</CardTitle>
           <p>Owner: {car.userProfile.FirstName}</p>
-          <p>Address: {car.userProfile.address}</p>
+          <p>Address: {car.userProfile}</p>
           <p>Model: {car.model}</p>
-          <p>Year: {car.year}</p>
+        <p>Year: {car.year}</p>
         </CardBody>
       </Card>
     </>
