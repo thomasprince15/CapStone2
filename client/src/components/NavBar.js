@@ -33,6 +33,21 @@ return (
                     Garage
                   </NavLink>
                 </NavItem>
+                <NavItem onClick={() => setOpen(false)}>
+                  <NavLink tag={RRNavLink} to="/create">
+                    New Car
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setOpen(false)}>
+                  <NavLink tag={RRNavLink} to="/WorkOrders">
+                    Work Orders
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setOpen(false)}>
+                  <NavLink tag={RRNavLink} to="/carlifts">
+                    Car Lifts
+                  </NavLink>
+                </NavItem>
             </Collapse>
             <Button
             color="primary"

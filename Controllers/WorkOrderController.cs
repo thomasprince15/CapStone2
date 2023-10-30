@@ -17,20 +17,13 @@ public class WorkOrderController : ControllerBase
         _dbContext = context;
     }
 
-    [HttpGet("incomplete")]
+    [HttpGet]
     [Authorize]
-    public IActionResult GetIncompleteWorkOrders()
+    public IActionResult Get()
     {
-        return Ok(_dbContext.WorkOrders
-        .Include(wo => wo.Car)
-        .ThenInclude(c => c.UserProfile)
-        .Include(wo => wo.Car)
-        .ThenInclude(b => b.Model)
-        .Include(wo => wo.UserProfile)
-        .OrderBy(wo => wo.DayNeeded)
-        .ThenByDescending(wo => wo.ProfileId == null).ToList());
+        return Ok(_dbContext.WorkOrders.Include(wo => wo.Car).ToList() );
     }
-
+    
     [HttpPost]
     [Authorize]
     public IActionResult CreateWorkOrder(WorkOrder workOrder)

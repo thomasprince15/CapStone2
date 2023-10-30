@@ -61,7 +61,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             },
             new CarLift
             {
-                 Id = 2,
+                Id = 2,
                 Type = "TwoPost"
             },
             new CarLift

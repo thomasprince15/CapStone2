@@ -50,11 +50,11 @@ export default function CreateWorkOrder({ loggedInUser }) {
             }}
           >
             <option value={0}>Choose a Car</option>
-            {cars.map((b) => (
+            {cars.map((c) => (
               <option
-                key={b.id}
-                value={b.id}
-              >{`${b.owner.name} - ${b.brand} - ${b.color}`}</option>
+                key={c.id}
+                value={c.id}
+              >{`${c.owner.name} - ${c.make} - ${c.model}`}</option>
             ))}
           </Input>
         </FormGroup>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import CarCard from "./CarCard";
 import { getCars } from "../../managers/carManager";
+import { Link } from "react-router-dom";
 
 export default function CarList({ setDetailsCarId }) {
   const [cars, setCars] = useState([]);
@@ -15,6 +16,7 @@ export default function CarList({ setDetailsCarId }) {
   return (
     <>
       <h2>Garage</h2>
+      <Link to="/Cars/create">New Car</Link>
       {cars.map((car) => (
         <CarCard
           car={car}

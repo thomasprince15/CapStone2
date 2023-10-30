@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 export default function CreateCar({ loggedInUser }) {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
-  const [year, setYear] = useState();
+  const [year, setYear] = useState(0);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newCar = {
-      Year,
-      Make,
-      Model,
+      year,
+      make,
+      model,
     };
 
     CreateCar(newCar).then(() => {
@@ -49,7 +49,7 @@ export default function CreateCar({ loggedInUser }) {
         <FormGroup>
           <Label>Year</Label>
           <Input
-            type="int"
+            type="Number"
             value={year}
             onChange={(e) => {
               setYear(e.target.value);

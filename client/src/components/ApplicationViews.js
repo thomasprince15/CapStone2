@@ -3,6 +3,10 @@ import { AuthorizedRoute } from "./auth/AuthorizedRoute";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Cars from "./cars/Cars";
+import CreateCar from "./cars/CreateCar";
+import WorkOrderList from "./Workorders/WorkOrderList";
+import CreateWorkOrder from "./Workorders/CreateWorkOrder";
+import CarLifts from "./CarLifts/CarLifts";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -12,7 +16,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           index
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <Cars />
+              <CarLifts />
             </AuthorizedRoute>
           }
         />
@@ -24,8 +28,15 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
-        {/*<Route path="workorders">
-          <Route
+        <Route
+            path="createcar"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                <CreateCar />
+              </AuthorizedRoute>
+            }
+          />
+          <Route path="workorders"
             index
             element={
               <AuthorizedRoute loggedInUser={loggedInUser}>
@@ -33,6 +44,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               </AuthorizedRoute>
             }
           />
+            <Route
+          path="carlifts"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <CarLifts />
+            </AuthorizedRoute>
+          }
+        />
           <Route
             path="create"
             element={
@@ -40,7 +59,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
                 <CreateWorkOrder />
               </AuthorizedRoute>
             }
-          /> */}
+          />
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}
