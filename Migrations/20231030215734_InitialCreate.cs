@@ -195,7 +195,7 @@ namespace CapStone2.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Year = table.Column<decimal>(type: "numeric", nullable: false),
+                    Year = table.Column<int>(type: "integer", nullable: false),
                     Make = table.Column<string>(type: "text", nullable: true),
                     Model = table.Column<string>(type: "text", nullable: true),
                     ProfileId = table.Column<int>(type: "integer", nullable: false),
@@ -220,13 +220,19 @@ namespace CapStone2.Migrations
                     ProfileId = table.Column<int>(type: "integer", nullable: true),
                     UserProfileId = table.Column<int>(type: "integer", nullable: true),
                     CarId = table.Column<int>(type: "integer", nullable: false),
-                    LiftId = table.Column<int>(type: "integer", nullable: false),
+                    CarLiftId = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DayNeeded = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkOrders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkOrders_CarLifts_CarLiftId",
+                        column: x => x.CarLiftId,
+                        principalTable: "CarLifts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_WorkOrders_Cars_CarId",
                         column: x => x.CarId,
@@ -243,12 +249,12 @@ namespace CapStone2.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "9a629430-337d-4d27-9dbf-998ab9772c4b", "Admin", "admin" });
+                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "d5c74f18-75a8-42df-98c9-2a53a65e32ae", "Admin", "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "dc898acd-5d40-4dca-a571-684f631e4982", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEI8SoAGFzVmBk34Z1SNOsax+H2S0PF0l6hAQRCCmsrBWJzPjihszenwB8sPC8r3HCg==", null, false, "22b5393f-e781-45c1-b969-6d3315c1e492", false, "Administrator" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "1f41d22c-a300-4e12-9c68-3aa481b0d9ed", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEFcHlJTSM4r1w7dqUlBHXiEEsWk2EMPXCa0zzbCMhqHW9gUOtO0tO4LGbHF+Ti9AJA==", null, false, "a058dee9-235d-4afa-8309-05d1640e6a02", false, "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "CarLifts",
@@ -265,11 +271,11 @@ namespace CapStone2.Migrations
                 columns: new[] { "Id", "Make", "Model", "ProfileId", "UserProfileId", "Year" },
                 values: new object[,]
                 {
-                    { 1, "Cheverolet", "Camero", 3, null, 1972m },
-                    { 2, "Datsun", "210", 1, null, 1965m },
-                    { 3, "Cheverolet", "C30", 3, null, 1979m },
-                    { 4, "Subaru", "WRX STI", 2, null, 2003m },
-                    { 5, "Cheverolet", "C10 Apache", 2, null, 1968m }
+                    { 1, "Cheverolet", "Camero", 3, null, 1972 },
+                    { 2, "Datsun", "210", 1, null, 1965 },
+                    { 3, "Cheverolet", "C30", 3, null, 1979 },
+                    { 4, "Subaru", "WRX STI", 2, null, 2003 },
+                    { 5, "Cheverolet", "C10 Apache", 2, null, 1968 }
                 });
 
             migrationBuilder.InsertData(
@@ -284,11 +290,11 @@ namespace CapStone2.Migrations
 
             migrationBuilder.InsertData(
                 table: "WorkOrders",
-                columns: new[] { "Id", "CarId", "DayNeeded", "Description", "LiftId", "ProfileId", "UserProfileId" },
+                columns: new[] { "Id", "CarId", "CarLiftId", "DayNeeded", "Description", "ProfileId", "UserProfileId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Flat Tire", 3, 2, null },
-                    { 2, 3, new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Burnt Clutch", 2, 1, null }
+                    { 1, 1, 3, new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Flat Tire", 2, null },
+                    { 2, 3, 2, new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Burnt Clutch", 1, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -344,6 +350,11 @@ namespace CapStone2.Migrations
                 column: "CarId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_WorkOrders_CarLiftId",
+                table: "WorkOrders",
+                column: "CarLiftId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_WorkOrders_UserProfileId",
                 table: "WorkOrders",
                 column: "UserProfileId");
@@ -367,13 +378,13 @@ namespace CapStone2.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CarLifts");
-
-            migrationBuilder.DropTable(
                 name: "WorkOrders");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "CarLifts");
 
             migrationBuilder.DropTable(
                 name: "Cars");

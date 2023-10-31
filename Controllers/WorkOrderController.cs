@@ -21,9 +21,12 @@ public class WorkOrderController : ControllerBase
     [Authorize]
     public IActionResult Get()
     {
-        return Ok(_dbContext.WorkOrders.Include(wo => wo.Car).ToList() );
+        return Ok(_dbContext.WorkOrders
+        .Include(wo => wo.Car)
+        .Include(wo => wo.CarLift)
+        .ToList());
     }
-    
+
     [HttpPost]
     [Authorize]
     public IActionResult CreateWorkOrder(WorkOrder workOrder)
@@ -35,26 +38,26 @@ public class WorkOrderController : ControllerBase
     }
 
     [HttpPut("{id}")]
-[Authorize]
-public IActionResult UpdateWorkOrder(WorkOrder workOrder, int id)
-{
-    WorkOrder workOrderToUpdate = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
-    if (workOrderToUpdate == null)
+    [Authorize]
+    public IActionResult UpdateWorkOrder(WorkOrder workOrder, int id)
     {
-        return NotFound();
+        WorkOrder workOrderToUpdate = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
+        if (workOrderToUpdate == null)
+        {
+            return NotFound();
+        }
+        else if (id != workOrder.Id)
+        {
+            return BadRequest();
+        }
+
+        //These are the only properties that we want to make editable
+        workOrderToUpdate.Description = workOrder.Description;
+        workOrderToUpdate.ProfileId = workOrder.ProfileId;
+        workOrderToUpdate.CarId = workOrder.CarId;
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
     }
-    else if (id != workOrder.Id)
-    {
-        return BadRequest();
-    }
-
-    //These are the only properties that we want to make editable
-    workOrderToUpdate.Description = workOrder.Description;
-    workOrderToUpdate.ProfileId = workOrder.ProfileId;
-    workOrderToUpdate.CarId = workOrder.CarId;
-
-    _dbContext.SaveChanges();
-
-    return NoContent();
-}
 }

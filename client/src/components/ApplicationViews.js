@@ -44,6 +44,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               </AuthorizedRoute>
             }
           />
+          <Route
+            path="workorders/create"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                <CreateWorkOrder />
+              </AuthorizedRoute>
+            }
+          />
             <Route
           path="carlifts"
           element={
@@ -52,14 +60,6 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
-          <Route
-            path="create"
-            element={
-              <AuthorizedRoute loggedInUser={loggedInUser}>
-                <CreateWorkOrder />
-              </AuthorizedRoute>
-            }
-          />
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}

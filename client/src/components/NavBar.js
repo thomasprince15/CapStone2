@@ -34,7 +34,7 @@ return (
                   </NavLink>
                 </NavItem>
                 <NavItem onClick={() => setOpen(false)}>
-                  <NavLink tag={RRNavLink} to="/create">
+                  <NavLink tag={RRNavLink} to="/createcar">
                     New Car
                   </NavLink>
                 </NavItem>
