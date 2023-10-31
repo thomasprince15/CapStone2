@@ -7,7 +7,7 @@ import {
   Button,
 } from "reactstrap";
 
-export default function CarliftCard({ carLift, setDetailsCarliftId }) {
+export default function CarliftCard({ carLift, setDetailsCarLiftId }) {
   return (
     <Card color="dark" outline style={{ marginBottom: "4px" }}>
       <CardBody>
@@ -16,7 +16,7 @@ export default function CarliftCard({ carLift, setDetailsCarliftId }) {
         <Button
           color="dark"
           onClick={() => {
-            setDetailsCarliftId(carLift.id);
+            setDetailsCarLiftId(carLift.id);
             window.scrollTo({
               top: 0,
               left: 0,

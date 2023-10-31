@@ -28,11 +28,9 @@ export default function CarDetails({ detailsCarId }) {
       <h2>Car Details</h2>
       <Card color="dark" inverse>
         <CardBody>
-          <CardTitle tag="h4">{car.make}</CardTitle>
-          <p>Owner: {car.userProfile}</p>
-          <p>Address: {car.userProfile}</p>
-          <p>Model: {car.model}</p>
-        <p>Year: {car.year}</p>
+          <CardTitle tag="h4">{car.Make}</CardTitle>
+          <p>Model: {car.Model}</p>
+        <p>Year: {car.Year}</p>
         </CardBody>
       </Card>
     </>

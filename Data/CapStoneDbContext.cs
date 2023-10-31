@@ -120,7 +120,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
                 Id = 1,
                 ProfileId = 2,
                 CarId = 1,
-                LiftId = 3,
+                CarLiftId = 3,
                 Description = "Flat Tire",
                 DayNeeded = new DateTime(2023, 7, 15)
             },
@@ -129,7 +129,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
                 Id = 2,
                 ProfileId = 1,
                 CarId = 3,
-                LiftId = 2,
+                CarLiftId = 2,
                 Description = "Burnt Clutch",
                 DayNeeded = new DateTime(2023, 7, 12),
             }

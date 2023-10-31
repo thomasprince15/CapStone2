@@ -24,7 +24,7 @@ export default function CreateCar({ loggedInUser }) {
 
   return (
     <>
-      <h2>Open a Work Order</h2>
+      <h2>Add A New Car</h2>
       <Form>
         <FormGroup>
           <Label>Make</Label>

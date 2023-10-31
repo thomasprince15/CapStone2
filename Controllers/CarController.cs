@@ -22,7 +22,7 @@ public class CarController : ControllerBase
     [Authorize]
      public IActionResult Get()
     {
-        return Ok(_dbContext.Cars.Include(c => c.UserProfile).ToList());
+        return Ok(_dbContext.Cars.ToList());
     }
 
     [HttpGet("{id}")]
@@ -31,7 +31,6 @@ public class CarController : ControllerBase
     {
         Car car = _dbContext
             .Cars
-            .Include(c => c.UserProfile)
             .Include(c => c.Year)
             .Include(c => c.Make)
             .Include(c => c.Model)
