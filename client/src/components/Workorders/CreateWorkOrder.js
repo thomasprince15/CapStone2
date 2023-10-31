@@ -15,17 +15,12 @@ export default function CreateWorkOrder({ loggedInUser }) {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    console.log(carliftId)
     e.preventDefault();
     const newWorkOrder = {
       carliftId,
       carId,
       description,
     };
-    console.log(
-      `new work order submitted: ${newWorkOrder.description}, 
-      carliftId: ${newWorkOrder.carliftId}, carId: ${newWorkOrder.carId}`,
-    );
     createWorkOrder(newWorkOrder).then(() => {
       navigate("/workorders");
     });
