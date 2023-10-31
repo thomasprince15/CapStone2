@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import { createcar } from "../../managers/carManager";
 
 
 export default function CreateCar({ loggedInUser }) {
@@ -16,8 +17,8 @@ export default function CreateCar({ loggedInUser }) {
       make,
       model,
     };
-
-    CreateCar(newCar).then(() => {
+    
+    createcar(newCar).then(() => {
       navigate("/cars");
     });
   };
@@ -31,8 +32,8 @@ export default function CreateCar({ loggedInUser }) {
           <Input
             type="text"
             value={make}
-            onChange={(e) => {
-              setMake(e.target.value);
+            onChange={(m) => {
+              setMake(m.target.value);
             }}
           />
         </FormGroup>
@@ -41,8 +42,8 @@ export default function CreateCar({ loggedInUser }) {
           <Input
             type="text"
             value={model}
-            onChange={(e) => {
-              setModel(e.target.value);
+            onChange={(o) => {
+              setModel(o.target.value);
             }}
           />
         </FormGroup>

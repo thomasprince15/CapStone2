@@ -44,4 +44,13 @@ public class CarController : ControllerBase
         return Ok(car);
     }
 
+    [HttpPost]
+    [Authorize]
+    public IActionResult CreateWorkOrder(Car car)
+    {
+        _dbContext.Cars.Add(car);
+        _dbContext.SaveChanges();
+        return Created($"/api/cars/{car.Id}", car);
+    }
+
 }
