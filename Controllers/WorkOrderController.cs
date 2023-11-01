@@ -18,7 +18,7 @@ public class WorkOrderController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
+    // [Authorize]
     public IActionResult Get()
     {
         return Ok(_dbContext.WorkOrders
@@ -52,8 +52,8 @@ public class WorkOrderController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize]
-    public IActionResult UpdateWorkOrder(WorkOrder workOrder, int id)
+    // [Authorize]
+    public IActionResult UpdateWorkOrder(int id, WorkOrder workOrder )
     {
         WorkOrder workOrderToUpdate = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
         if (workOrderToUpdate == null)

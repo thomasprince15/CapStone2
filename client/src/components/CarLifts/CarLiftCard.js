@@ -13,19 +13,6 @@ export default function CarliftCard({ carLift, setDetailsCarLiftId }) {
       <CardBody>
         <CardTitle tag="h5">Bay {carLift.id}</CardTitle>
         <CardText>Type: {carLift.type}</CardText>
-        <Button
-          color="dark"
-          onClick={() => {
-            setDetailsCarLiftId(carLift.id);
-            window.scrollTo({
-              top: 0,
-              left: 0,
-              behavior: "smooth",
-            });
-          }}
-        >
-          Show Details
-        </Button>
       </CardBody>
     </Card>
   );

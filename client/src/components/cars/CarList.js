@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import CarCard from "./CarCard";
 import { getCars } from "../../managers/carManager";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-export default function CarList({ setDetailsCarId }) {
+export default function CarList({ props }) {
   const [cars, setCars] = useState([]);
-
+  
   const getAllCars = () => {
     getCars().then(setCars);
   };
@@ -13,6 +13,9 @@ export default function CarList({ setDetailsCarId }) {
   useEffect(() => {
     getAllCars();
   }, []);
+  
+  const refresh = getAllCars()
+  
   return (
     <>
       <h2>Garage</h2>
@@ -20,8 +23,8 @@ export default function CarList({ setDetailsCarId }) {
       {cars.map((car) => (
         <CarCard
           car={car}
-          setDetailsCarId={setDetailsCarId}
-          key={car.id}
+          // setDetailsCarId={setDetailsCarId}
+          // key={car.id}
         ></CarCard>
       ))}
     </>

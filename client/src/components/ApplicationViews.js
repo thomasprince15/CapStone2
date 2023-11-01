@@ -54,7 +54,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             }
           />
           <Route
-            path="workorders/${id}/edit"
+            path="/workorders/:id"
             element={
               <AuthorizedRoute loggedInUser={loggedInUser}>
                 <EditWorkOrder />

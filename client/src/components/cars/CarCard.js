@@ -7,24 +7,16 @@ import {
   Button,
 } from "reactstrap";
 
-import { deleteThisCar, getCars } from "../../managers/carManager";
-import { useEffect, useState } from "react";
+import { deleteThisCar } from "../../managers/carManager";
+import { useNavigate } from "react-router-dom";
 
-export default function CarCard({ car, setDetailsCarId }) {
-  const [cars, setCars] = useState([]);
-
-  const getAllCars = () => {
-    getCars().then(setCars);
-  };
-
-  useEffect(() => {
-    getAllCars();
-  }, []);
+export default function CarCard({ props, car }) {
+  const navigate = useNavigate();
 
   const deleteCar = (id) => {
     deleteThisCar(id)
       .then(() => {
-        getAllCars();
+        navigate("/cars")
       })
   };
 
@@ -34,19 +26,6 @@ export default function CarCard({ car, setDetailsCarId }) {
         <CardTitle tag="h5">{car.make}</CardTitle>
         <CardText>Model: {car.model}</CardText>
         <CardText>Year: {car.year}</CardText>
-        <Button
-          color="dark"
-          onClick={() => {
-            setDetailsCarId(car.id);
-            window.scrollTo({
-              top: 0,
-              left: 0,
-              behavior: "smooth",
-            });
-          }}
-        >
-          Show Details
-        </Button>
         <Button
           onClick={() => deleteCar(car.id)}
           color="danger"
