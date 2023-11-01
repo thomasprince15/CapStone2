@@ -41,8 +41,8 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             RoleId = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
             UserId = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f"
         });
-        modelBuilder.Entity<UserProfile>().HasData(new UserProfile []
-        { 
+        modelBuilder.Entity<UserProfile>().HasData(new UserProfile[]
+        {
             new UserProfile
             {
             Id = 1,
@@ -67,6 +67,21 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             new CarLift
             {
                 Id = 3,
+                Type = "TwoPost"
+            },
+            new CarLift
+            {
+                Id = 4,
+                Type = "TwoPost"
+            },
+            new CarLift
+            {
+                Id = 5,
+                Type = "TwoPost"
+            },
+            new CarLift
+            {
+                Id = 6,
                 Type = "TwoPost"
             }
         });
@@ -132,7 +147,42 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
                 CarLiftId = 2,
                 Description = "Burnt Clutch",
                 DayNeeded = new DateTime(2023, 7, 12),
+            },
+            new WorkOrder
+            {
+                Id = 3,
+                ProfileId = 4,
+                CarId = 1,
+                CarLiftId = 1,
+                Description = "broken clutch fork",
+                DayNeeded = new DateTime(2023, 7, 12),
+            },
+            new WorkOrder
+            {
+                Id = 4,
+                CarLiftId = 4,
+                CarId = 2,
+                Description = "broken brakes",
+                DayNeeded = new DateTime(2023, 7, 15),
+            },
+            new WorkOrder
+            {
+                Id = 5,
+                CarLiftId = 6,
+                CarId = 4,
+                Description = "Slipping transmission",
+                DayNeeded = new DateTime(2023, 7, 11),
+            },
+            new WorkOrder
+            {
+                Id = 6,
+                CarLiftId = 5,
+                CarId = 5,
+                Description = "Cracked Radiator",
+                DayNeeded = new DateTime(2023, 7, 19),
             }
-        });
+
+
+    });
     }
 }

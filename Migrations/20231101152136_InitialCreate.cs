@@ -249,12 +249,12 @@ namespace CapStone2.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "d5c74f18-75a8-42df-98c9-2a53a65e32ae", "Admin", "admin" });
+                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "d9158828-b3bb-41ff-bc4e-a0d34cb663ca", "Admin", "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "1f41d22c-a300-4e12-9c68-3aa481b0d9ed", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEFcHlJTSM4r1w7dqUlBHXiEEsWk2EMPXCa0zzbCMhqHW9gUOtO0tO4LGbHF+Ti9AJA==", null, false, "a058dee9-235d-4afa-8309-05d1640e6a02", false, "Administrator" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "ecffb944-c1cf-4049-8dcf-9e6e0ba98796", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEK8r8PeJXaFo3BffViE/wFr0Iqz5iNr5jeMgTJawsU3JC4hgDoPqTn/kq2LtGRI8sw==", null, false, "425a6f1a-3804-47d1-a89c-39c4fbaca00a", false, "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "CarLifts",
@@ -263,7 +263,10 @@ namespace CapStone2.Migrations
                 {
                     { 1, "TwoPost" },
                     { 2, "TwoPost" },
-                    { 3, "TwoPost" }
+                    { 3, "TwoPost" },
+                    { 4, "TwoPost" },
+                    { 5, "TwoPost" },
+                    { 6, "TwoPost" }
                 });
 
             migrationBuilder.InsertData(
@@ -294,7 +297,11 @@ namespace CapStone2.Migrations
                 values: new object[,]
                 {
                     { 1, 1, 3, new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Flat Tire", 2, null },
-                    { 2, 3, 2, new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Burnt Clutch", 1, null }
+                    { 2, 3, 2, new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Burnt Clutch", 1, null },
+                    { 3, 1, 1, new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "broken clutch fork", 4, null },
+                    { 4, 2, 4, new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "broken brakes", null, null },
+                    { 5, 4, 6, new DateTime(2023, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Slipping transmission", null, null },
+                    { 6, 5, 5, new DateTime(2023, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cracked Radiator", null, null }
                 });
 
             migrationBuilder.CreateIndex(

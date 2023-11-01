@@ -3,34 +3,52 @@ import { getCars } from "../../managers/carManager";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCarLifts } from "../../managers/carliftManager";
-import { getWorkOrderById, updateWorkOrder } from "../../managers/WorkOrderManager";
+import { getWorkOrderById, editWorkOrder } from "../../managers/WorkOrderManager";
 
 
 export default function EditWorkOrder({ loggedInUser }) {
     const { id } = useParams();
-    const [workOrder, setWorkOrder] = useState();
-    const [description, setDescription] = useState(workOrder.description);
-    const [carliftId, setCarLiftId] = useState(workOrder.carliftId)
+    const [workOrder, setWorkOrder] = useState({});
+    const [description, setDescription] = useState("");
+    const [carliftId, setCarLiftId] = useState(0)
     const [carlifts, setCarLifts] = useState([])
-    const [carId, setCarId] = useState(workOrder.carId);
+    const [carId, setCarId] = useState(0);
     const [cars, setCars] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        getWorkOrderById(id).then(setWorkOrder);
-    }, []);
+        console.log(id);
+    
+        getWorkOrderById(id).then((wo) => {
+            setWorkOrder(wo);
+        });
+    
+    }, [id]);
+    
+    useEffect(() => {
+        if (workOrder) {
+            console.log(workOrder);
+            setCarId(workOrder.carId);
+            setCarLiftId(workOrder.carLiftId);
+            setDescription(workOrder.description);
+        } else {
+            console.log("no worky");
+        }
+    }, [workOrder]);
 
     const handleEdit = (e) => {
         e.preventDefault();
-        const newWorkOrder = {
-            carliftId,
-            carId,
-            description,
+        const updatedWorkOrder = {
+            id: workOrder.id,
+            carliftId: carliftId,
+            carId: carId,
+            description: description,
         };
-        updateWorkOrder(newWorkOrder).then(() => {
-            navigate("/workorders");
-        });
+        console.log(updatedWorkOrder)
+        editWorkOrder(updatedWorkOrder)
+            .then(() => navigate("/workorders"));
     };
+    
 
     useEffect(() => {
         getCarLifts().then(setCarLifts);
@@ -50,6 +68,7 @@ export default function EditWorkOrder({ loggedInUser }) {
                         type="text"
                         value={description}
                         onChange={(f) => {
+                            console.log(description)
                             setDescription(f.target.value);
                         }}
                     />
@@ -62,6 +81,7 @@ export default function EditWorkOrder({ loggedInUser }) {
                         onChange={(f) => {
                             console.log(carliftId)
                             setCarLiftId(parseInt(f.target.value));
+                            console.log(carliftId)
                         }}
                     >
                         <option value={0}>Choose a Car Lift</option>
@@ -79,6 +99,7 @@ export default function EditWorkOrder({ loggedInUser }) {
                         type="select"
                         value={carId}
                         onChange={(e) => {
+                            console.log(carId)
                             setCarId(parseInt(e.target.value));
                         }}
                     >

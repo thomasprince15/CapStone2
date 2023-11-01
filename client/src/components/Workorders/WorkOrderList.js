@@ -46,10 +46,13 @@ export default function WorkOrderList({ loggedInUser }) {
                             <td>{wo.description}</td>
                             <td>{new Date(wo.dayNeeded).toLocaleDateString()}</td>
                             <td>
-                            <Button onClick={() => { navigate(`/workorders/${wo.id}/edit`) }}>Edit</Button>
+                            <Button onClick={() => { 
+                                navigate(`/workorders/${wo.id}`) 
+                            }}
+                                >Edit</Button>
                             </td>
                             <td><Button
-                                onClick={() => deleteThisWorkOrder(workOrders.id)}
+                                onClick={() => deleteThisWorkOrder(wo.id) }
                                 color="danger"
                             >
                                 Delete

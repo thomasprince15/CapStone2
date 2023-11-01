@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CapStone2.Migrations
 {
     [DbContext(typeof(CapStone2DbContext))]
-    [Migration("20231030215734_InitialCreate")]
+    [Migration("20231101152136_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,6 +126,21 @@ namespace CapStone2.Migrations
                         {
                             Id = 3,
                             Type = "TwoPost"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Type = "TwoPost"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Type = "TwoPost"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Type = "TwoPost"
                         });
                 });
 
@@ -220,6 +235,39 @@ namespace CapStone2.Migrations
                             DayNeeded = new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Burnt Clutch",
                             ProfileId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CarId = 1,
+                            CarLiftId = 1,
+                            DayNeeded = new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "broken clutch fork",
+                            ProfileId = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CarId = 2,
+                            CarLiftId = 4,
+                            DayNeeded = new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "broken brakes"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CarId = 4,
+                            CarLiftId = 6,
+                            DayNeeded = new DateTime(2023, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Slipping transmission"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CarId = 5,
+                            CarLiftId = 5,
+                            DayNeeded = new DateTime(2023, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Cracked Radiator"
                         });
                 });
 
@@ -252,7 +300,7 @@ namespace CapStone2.Migrations
                         new
                         {
                             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
-                            ConcurrencyStamp = "d5c74f18-75a8-42df-98c9-2a53a65e32ae",
+                            ConcurrencyStamp = "d9158828-b3bb-41ff-bc4e-a0d34cb663ca",
                             Name = "Admin",
                             NormalizedName = "admin"
                         });
@@ -351,13 +399,13 @@ namespace CapStone2.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f41d22c-a300-4e12-9c68-3aa481b0d9ed",
+                            ConcurrencyStamp = "ecffb944-c1cf-4049-8dcf-9e6e0ba98796",
                             Email = "admina@strator.comx",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEFcHlJTSM4r1w7dqUlBHXiEEsWk2EMPXCa0zzbCMhqHW9gUOtO0tO4LGbHF+Ti9AJA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK8r8PeJXaFo3BffViE/wFr0Iqz5iNr5jeMgTJawsU3JC4hgDoPqTn/kq2LtGRI8sw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a058dee9-235d-4afa-8309-05d1640e6a02",
+                            SecurityStamp = "425a6f1a-3804-47d1-a89c-39c4fbaca00a",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });

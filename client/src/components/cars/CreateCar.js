@@ -17,7 +17,7 @@ export default function CreateCar({ loggedInUser }) {
       make,
       model,
     };
-    
+
     createcar(newCar).then(() => {
       navigate("/cars");
     });
@@ -59,6 +59,9 @@ export default function CreateCar({ loggedInUser }) {
         </FormGroup>
         <Button onClick={handleSubmit} color="primary">
           Submit
+        </Button>
+        <Button onClick={() => { navigate(`/cars`) }} color="danger">
+          Cancel
         </Button>
       </Form>
     </>
