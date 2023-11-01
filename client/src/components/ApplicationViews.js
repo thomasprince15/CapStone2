@@ -7,6 +7,7 @@ import CreateCar from "./cars/CreateCar";
 import WorkOrderList from "./Workorders/WorkOrderList";
 import CreateWorkOrder from "./Workorders/CreateWorkOrder";
 import CarLifts from "./CarLifts/CarLifts";
+import EditWorkOrder from "./Workorders/EditWorkOrder";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -49,6 +50,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             element={
               <AuthorizedRoute loggedInUser={loggedInUser}>
                 <CreateWorkOrder />
+              </AuthorizedRoute>
+            }
+          />
+          <Route
+            path="workorders/${id}/edit"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                <EditWorkOrder />
               </AuthorizedRoute>
             }
           />

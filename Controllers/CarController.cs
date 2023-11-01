@@ -46,11 +46,28 @@ public class CarController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    public IActionResult CreateWorkOrder(Car car)
+    public IActionResult CreateCar(Car car)
     {
         _dbContext.Cars.Add(car);
         _dbContext.SaveChanges();
         return Created($"/api/cars/{car.Id}", car);
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize]
+     public IActionResult DeleteCar(int id)
+    {
+        Car carToDelete = _dbContext.Cars.SingleOrDefault(c => c.Id == id);
+
+        if (carToDelete == null)
+        {
+            return NotFound();
+        }
+
+        _dbContext.Cars.Remove(carToDelete);
+        _dbContext.SaveChanges();
+
+        return NoContent();
     }
 
 }

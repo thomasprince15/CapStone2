@@ -16,7 +16,7 @@ export default function CarList({ setDetailsCarId }) {
   return (
     <>
       <h2>Garage</h2>
-      <Link to="/Cars/create/car">New Car</Link>
+      <Link to="/createcar">New Car</Link>
       {cars.map((car) => (
         <CarCard
           car={car}

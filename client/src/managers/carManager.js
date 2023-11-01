@@ -17,3 +17,9 @@ export const createcar = (car) => {
     body: JSON.stringify(car),
   }).then((res) => res.json);
 };
+
+export const deleteThisCar = (id) => {
+  return fetch(`${apiUrl}/${id}`, {
+    method: "DELETE",
+  });
+};

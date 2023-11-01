@@ -27,6 +27,20 @@ public class WorkOrderController : ControllerBase
         .ToList());
     }
 
+    [HttpGet("{id}")]
+    [Authorize]
+    public IActionResult GetWorkOrderById(int id)
+    {
+        WorkOrder workOrder = _dbContext
+        .WorkOrders
+        .SingleOrDefault(c => c.Id == id);
+        if (workOrder == null)
+        {
+            return NotFound();
+        }
+        return Ok(workOrder);
+    }
+
     [HttpPost]
     [Authorize]
     public IActionResult CreateWorkOrder(WorkOrder workOrder)
@@ -53,11 +67,30 @@ public class WorkOrderController : ControllerBase
 
         //These are the only properties that we want to make editable
         workOrderToUpdate.Description = workOrder.Description;
-        workOrderToUpdate.ProfileId = workOrder.ProfileId;
+        workOrderToUpdate.CarLiftId = workOrder.CarLiftId;
         workOrderToUpdate.CarId = workOrder.CarId;
 
         _dbContext.SaveChanges();
 
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize]
+     public IActionResult DeleteWorkOrder(int id)
+    {
+        // Find the work order by its ID
+        WorkOrder workOrderToDelete = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
+
+        if (workOrderToDelete == null)
+        {
+            // If the work order with the specified ID does not exist, return a "Not Found" response
+            return NotFound();
+        }
+        // Remove the work order from the database
+        _dbContext.WorkOrders.Remove(workOrderToDelete);
+        _dbContext.SaveChanges();
+        // Return a "No Content" response to indicate successful deletion
         return NoContent();
     }
 }
