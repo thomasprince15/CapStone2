@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CapStone2.Migrations
 {
     [DbContext(typeof(CapStone2DbContext))]
-    [Migration("20231101152136_InitialCreate")]
+    [Migration("20231102163538_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,10 +38,7 @@ namespace CapStone2.Migrations
                     b.Property<string>("Model")
                         .HasColumnType("text");
 
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("UserProfileId")
+                    b.Property<int>("UserProfileId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Year")
@@ -59,7 +56,7 @@ namespace CapStone2.Migrations
                             Id = 1,
                             Make = "Cheverolet",
                             Model = "Camero",
-                            ProfileId = 3,
+                            UserProfileId = 2,
                             Year = 1972
                         },
                         new
@@ -67,7 +64,7 @@ namespace CapStone2.Migrations
                             Id = 2,
                             Make = "Datsun",
                             Model = "210",
-                            ProfileId = 1,
+                            UserProfileId = 1,
                             Year = 1965
                         },
                         new
@@ -75,7 +72,7 @@ namespace CapStone2.Migrations
                             Id = 3,
                             Make = "Cheverolet",
                             Model = "C30",
-                            ProfileId = 3,
+                            UserProfileId = 2,
                             Year = 1979
                         },
                         new
@@ -83,7 +80,7 @@ namespace CapStone2.Migrations
                             Id = 4,
                             Make = "Subaru",
                             Model = "WRX STI",
-                            ProfileId = 2,
+                            UserProfileId = 1,
                             Year = 2003
                         },
                         new
@@ -91,7 +88,7 @@ namespace CapStone2.Migrations
                             Id = 5,
                             Make = "Cheverolet",
                             Model = "C10 Apache",
-                            ProfileId = 2,
+                            UserProfileId = 2,
                             Year = 1968
                         });
                 });
@@ -178,6 +175,14 @@ namespace CapStone2.Migrations
                             FirstName = "Admina",
                             IdentityUserId = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             LastName = "Strator"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "103 Main Street",
+                            FirstName = "Demon",
+                            IdentityUserId = "dbc30bc6-0738-3ac4-a2ed-360f5e827a7f",
+                            LastName = "Strator"
                         });
                 });
 
@@ -201,10 +206,7 @@ namespace CapStone2.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int?>("ProfileId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("UserProfileId")
+                    b.Property<int>("UserProfileId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -225,7 +227,7 @@ namespace CapStone2.Migrations
                             CarLiftId = 3,
                             DayNeeded = new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Flat Tire",
-                            ProfileId = 2
+                            UserProfileId = 2
                         },
                         new
                         {
@@ -234,7 +236,7 @@ namespace CapStone2.Migrations
                             CarLiftId = 2,
                             DayNeeded = new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Burnt Clutch",
-                            ProfileId = 1
+                            UserProfileId = 1
                         },
                         new
                         {
@@ -243,7 +245,7 @@ namespace CapStone2.Migrations
                             CarLiftId = 1,
                             DayNeeded = new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "broken clutch fork",
-                            ProfileId = 4
+                            UserProfileId = 2
                         },
                         new
                         {
@@ -251,7 +253,8 @@ namespace CapStone2.Migrations
                             CarId = 2,
                             CarLiftId = 4,
                             DayNeeded = new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "broken brakes"
+                            Description = "broken brakes",
+                            UserProfileId = 1
                         },
                         new
                         {
@@ -259,7 +262,8 @@ namespace CapStone2.Migrations
                             CarId = 4,
                             CarLiftId = 6,
                             DayNeeded = new DateTime(2023, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Slipping transmission"
+                            Description = "Slipping transmission",
+                            UserProfileId = 2
                         },
                         new
                         {
@@ -267,7 +271,8 @@ namespace CapStone2.Migrations
                             CarId = 5,
                             CarLiftId = 5,
                             DayNeeded = new DateTime(2023, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Cracked Radiator"
+                            Description = "Cracked Radiator",
+                            UserProfileId = 1
                         });
                 });
 
@@ -300,9 +305,16 @@ namespace CapStone2.Migrations
                         new
                         {
                             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
-                            ConcurrencyStamp = "d9158828-b3bb-41ff-bc4e-a0d34cb663ca",
+                            ConcurrencyStamp = "16decfbd-3e57-4b3a-b493-2cc337118343",
                             Name = "Admin",
                             NormalizedName = "admin"
+                        },
+                        new
+                        {
+                            Id = "9008fba6-93a0-412d-bc99-84a6cafb2be5",
+                            ConcurrencyStamp = "4230fc9a-7fce-4fda-a36a-255fd9a5a5cd",
+                            Name = "Customer",
+                            NormalizedName = "customer"
                         });
                 });
 
@@ -399,15 +411,29 @@ namespace CapStone2.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ecffb944-c1cf-4049-8dcf-9e6e0ba98796",
+                            ConcurrencyStamp = "f079e282-367a-43ca-a4dc-2a1b0f77dc63",
                             Email = "admina@strator.comx",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEK8r8PeJXaFo3BffViE/wFr0Iqz5iNr5jeMgTJawsU3JC4hgDoPqTn/kq2LtGRI8sw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP+R/Zj3KLK4bCQkzc2ODi17gxV/P2cR+wXhdQ5po0lY7wTRAbT/uIv4HbT/rejlDg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "425a6f1a-3804-47d1-a89c-39c4fbaca00a",
+                            SecurityStamp = "ba0db702-634a-4e35-81df-8205e4615a49",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
+                        },
+                        new
+                        {
+                            Id = "dbc30bc6-0738-3ac4-a2ed-360f5e827a7f",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d8913747-58ee-49f2-883b-4228b8a59488",
+                            Email = "demon@strator.comx",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEA9WtK/OQ4K6QNo9kKeUCfnW1JQrJUiADG9BumMJVG/n+O9pjF3wW2/gBBLbwG4BBw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5df9daa9-d44d-4d91-a340-ef9001fd9382",
+                            TwoFactorEnabled = false,
+                            UserName = "Demon"
                         });
                 });
 
@@ -477,6 +503,11 @@ namespace CapStone2.Migrations
                         {
                             UserId = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             RoleId = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35"
+                        },
+                        new
+                        {
+                            UserId = "dbc30bc6-0738-3ac4-a2ed-360f5e827a7f",
+                            RoleId = "9008fba6-93a0-412d-bc99-84a6cafb2be5"
                         });
                 });
 
@@ -503,7 +534,9 @@ namespace CapStone2.Migrations
                 {
                     b.HasOne("CapStone2.Models.UserProfile", "UserProfile")
                         .WithMany()
-                        .HasForeignKey("UserProfileId");
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("UserProfile");
                 });
@@ -533,7 +566,9 @@ namespace CapStone2.Migrations
 
                     b.HasOne("CapStone2.Models.UserProfile", "UserProfile")
                         .WithMany("WorkOrders")
-                        .HasForeignKey("UserProfileId");
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Car");
 

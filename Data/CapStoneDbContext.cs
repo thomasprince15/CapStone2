@@ -21,25 +21,52 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+        modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole[]
         {
+            new IdentityRole
+            {
             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
             Name = "Admin",
             NormalizedName = "admin"
+            },
+            new IdentityRole
+        {
+            Id = "9008fba6-93a0-412d-bc99-84a6cafb2be5",
+            Name = "Customer",
+            NormalizedName = "customer"
+        }
         });
 
-        modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
+        modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser[]
         {
+            new IdentityUser
+            {
             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
             UserName = "Administrator",
             Email = "admina@strator.comx",
             PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, _configuration["AdminPassword"])
+            },
+            new IdentityUser
+            {
+            Id = "dbc30bc6-0738-3ac4-a2ed-360f5e827a7f",
+            UserName = "Demon",
+            Email = "demon@strator.comx",
+            PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, _configuration["AdminPassword"])
+            }
         });
 
-        modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+        modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>[]
         {
+            new IdentityUserRole<string>
+            {
             RoleId = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
             UserId = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f"
+            },
+            new IdentityUserRole<string>
+            {
+                RoleId = "9008fba6-93a0-412d-bc99-84a6cafb2be5", 
+                UserId = "dbc30bc6-0738-3ac4-a2ed-360f5e827a7f" 
+            }
         });
         modelBuilder.Entity<UserProfile>().HasData(new UserProfile[]
         {
@@ -50,6 +77,14 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             FirstName = "Admina",
             LastName = "Strator",
             Address = "101 Main Street",
+            },
+            new UserProfile
+            {
+            Id = 2,
+            IdentityUserId = "dbc30bc6-0738-3ac4-a2ed-360f5e827a7f",
+            FirstName = "Demon",
+            LastName = "Strator",
+            Address = "103 Main Street",
             }
         });
         modelBuilder.Entity<CarLift>().HasData(new CarLift[]
@@ -93,7 +128,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
                 Year = 1972,
                 Make = "Cheverolet",
                 Model = "Camero",
-                ProfileId = 3
+                UserProfileId = 2
             },
             new Car
             {
@@ -101,7 +136,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
                 Year = 1965,
                 Make = "Datsun",
                 Model = "210",
-                ProfileId = 1
+                UserProfileId = 1
             },
             new Car
             {
@@ -109,7 +144,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
                 Year = 1979,
                 Make = "Cheverolet",
                 Model = "C30",
-                ProfileId = 3
+                UserProfileId = 2
             },
             new Car
             {
@@ -117,7 +152,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
                 Year = 2003,
                 Make = "Subaru",
                 Model = "WRX STI",
-                ProfileId = 2
+                UserProfileId = 1
             },
             new Car
             {
@@ -125,7 +160,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
                 Year = 1968,
                 Make = "Cheverolet",
                 Model = "C10 Apache",
-                ProfileId = 2
+                UserProfileId = 2
             },
         });
         modelBuilder.Entity<WorkOrder>().HasData(new WorkOrder[]
@@ -133,7 +168,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             new WorkOrder
             {
                 Id = 1,
-                ProfileId = 2,
+                UserProfileId = 2,
                 CarId = 1,
                 CarLiftId = 3,
                 Description = "Flat Tire",
@@ -142,7 +177,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             new WorkOrder
             {
                 Id = 2,
-                ProfileId = 1,
+                UserProfileId = 1,
                 CarId = 3,
                 CarLiftId = 2,
                 Description = "Burnt Clutch",
@@ -151,7 +186,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             new WorkOrder
             {
                 Id = 3,
-                ProfileId = 4,
+                UserProfileId = 2,
                 CarId = 1,
                 CarLiftId = 1,
                 Description = "broken clutch fork",
@@ -160,6 +195,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             new WorkOrder
             {
                 Id = 4,
+                UserProfileId = 1,
                 CarLiftId = 4,
                 CarId = 2,
                 Description = "broken brakes",
@@ -168,6 +204,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             new WorkOrder
             {
                 Id = 5,
+                UserProfileId = 2,
                 CarLiftId = 6,
                 CarId = 4,
                 Description = "Slipping transmission",
@@ -176,6 +213,7 @@ public class CapStone2DbContext : IdentityDbContext<IdentityUser>
             new WorkOrder
             {
                 Id = 6,
+                UserProfileId = 1,
                 CarLiftId = 5,
                 CarId = 5,
                 Description = "Cracked Radiator",

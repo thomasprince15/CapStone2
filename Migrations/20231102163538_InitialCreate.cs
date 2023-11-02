@@ -198,8 +198,7 @@ namespace CapStone2.Migrations
                     Year = table.Column<int>(type: "integer", nullable: false),
                     Make = table.Column<string>(type: "text", nullable: true),
                     Model = table.Column<string>(type: "text", nullable: true),
-                    ProfileId = table.Column<int>(type: "integer", nullable: false),
-                    UserProfileId = table.Column<int>(type: "integer", nullable: true)
+                    UserProfileId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -208,7 +207,8 @@ namespace CapStone2.Migrations
                         name: "FK_Cars_UserProfiles_UserProfileId",
                         column: x => x.UserProfileId,
                         principalTable: "UserProfiles",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -217,8 +217,7 @@ namespace CapStone2.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ProfileId = table.Column<int>(type: "integer", nullable: true),
-                    UserProfileId = table.Column<int>(type: "integer", nullable: true),
+                    UserProfileId = table.Column<int>(type: "integer", nullable: false),
                     CarId = table.Column<int>(type: "integer", nullable: false),
                     CarLiftId = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
@@ -243,18 +242,27 @@ namespace CapStone2.Migrations
                         name: "FK_WorkOrders_UserProfiles_UserProfileId",
                         column: x => x.UserProfileId,
                         principalTable: "UserProfiles",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "d9158828-b3bb-41ff-bc4e-a0d34cb663ca", "Admin", "admin" });
+                values: new object[,]
+                {
+                    { "9008fba6-93a0-412d-bc99-84a6cafb2be5", "4230fc9a-7fce-4fda-a36a-255fd9a5a5cd", "Customer", "customer" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "16decfbd-3e57-4b3a-b493-2cc337118343", "Admin", "admin" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "ecffb944-c1cf-4049-8dcf-9e6e0ba98796", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEK8r8PeJXaFo3BffViE/wFr0Iqz5iNr5jeMgTJawsU3JC4hgDoPqTn/kq2LtGRI8sw==", null, false, "425a6f1a-3804-47d1-a89c-39c4fbaca00a", false, "Administrator" });
+                values: new object[,]
+                {
+                    { "dbc30bc6-0738-3ac4-a2ed-360f5e827a7f", 0, "d8913747-58ee-49f2-883b-4228b8a59488", "demon@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEA9WtK/OQ4K6QNo9kKeUCfnW1JQrJUiADG9BumMJVG/n+O9pjF3wW2/gBBLbwG4BBw==", null, false, "5df9daa9-d44d-4d91-a340-ef9001fd9382", false, "Demon" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "f079e282-367a-43ca-a4dc-2a1b0f77dc63", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEP+R/Zj3KLK4bCQkzc2ODi17gxV/P2cR+wXhdQ5po0lY7wTRAbT/uIv4HbT/rejlDg==", null, false, "ba0db702-634a-4e35-81df-8205e4615a49", false, "Administrator" }
+                });
 
             migrationBuilder.InsertData(
                 table: "CarLifts",
@@ -270,38 +278,46 @@ namespace CapStone2.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Cars",
-                columns: new[] { "Id", "Make", "Model", "ProfileId", "UserProfileId", "Year" },
-                values: new object[,]
-                {
-                    { 1, "Cheverolet", "Camero", 3, null, 1972 },
-                    { 2, "Datsun", "210", 1, null, 1965 },
-                    { 3, "Cheverolet", "C30", 3, null, 1979 },
-                    { 4, "Subaru", "WRX STI", 2, null, 2003 },
-                    { 5, "Cheverolet", "C10 Apache", 2, null, 1968 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f" });
+                values: new object[,]
+                {
+                    { "9008fba6-93a0-412d-bc99-84a6cafb2be5", "dbc30bc6-0738-3ac4-a2ed-360f5e827a7f" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f" }
+                });
 
             migrationBuilder.InsertData(
                 table: "UserProfiles",
                 columns: new[] { "Id", "Address", "FirstName", "IdentityUserId", "LastName" },
-                values: new object[] { 1, "101 Main Street", "Admina", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Strator" });
+                values: new object[,]
+                {
+                    { 1, "101 Main Street", "Admina", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Strator" },
+                    { 2, "103 Main Street", "Demon", "dbc30bc6-0738-3ac4-a2ed-360f5e827a7f", "Strator" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cars",
+                columns: new[] { "Id", "Make", "Model", "UserProfileId", "Year" },
+                values: new object[,]
+                {
+                    { 1, "Cheverolet", "Camero", 2, 1972 },
+                    { 2, "Datsun", "210", 1, 1965 },
+                    { 3, "Cheverolet", "C30", 2, 1979 },
+                    { 4, "Subaru", "WRX STI", 1, 2003 },
+                    { 5, "Cheverolet", "C10 Apache", 2, 1968 }
+                });
 
             migrationBuilder.InsertData(
                 table: "WorkOrders",
-                columns: new[] { "Id", "CarId", "CarLiftId", "DayNeeded", "Description", "ProfileId", "UserProfileId" },
+                columns: new[] { "Id", "CarId", "CarLiftId", "DayNeeded", "Description", "UserProfileId" },
                 values: new object[,]
                 {
-                    { 1, 1, 3, new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Flat Tire", 2, null },
-                    { 2, 3, 2, new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Burnt Clutch", 1, null },
-                    { 3, 1, 1, new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "broken clutch fork", 4, null },
-                    { 4, 2, 4, new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "broken brakes", null, null },
-                    { 5, 4, 6, new DateTime(2023, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Slipping transmission", null, null },
-                    { 6, 5, 5, new DateTime(2023, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cracked Radiator", null, null }
+                    { 1, 1, 3, new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Flat Tire", 2 },
+                    { 2, 3, 2, new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Burnt Clutch", 1 },
+                    { 3, 1, 1, new DateTime(2023, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "broken clutch fork", 2 },
+                    { 4, 2, 4, new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "broken brakes", 1 },
+                    { 5, 4, 6, new DateTime(2023, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Slipping transmission", 2 },
+                    { 6, 5, 5, new DateTime(2023, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cracked Radiator", 1 }
                 });
 
             migrationBuilder.CreateIndex(

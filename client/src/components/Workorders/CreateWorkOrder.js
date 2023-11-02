@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getCars } from "../../managers/carManager";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ export default function CreateWorkOrder({ loggedInUser }) {
   const [carlifts, setCarLifts] = useState([])
   const [carId, setCarId] = useState(0);
   const [cars, setCars] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("")
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -20,6 +21,7 @@ export default function CreateWorkOrder({ loggedInUser }) {
       carliftId,
       carId,
       description,
+      dayneeded: selectedDate,
     };
     createWorkOrder(newWorkOrder).then(() => {
       navigate("/workorders");
@@ -29,7 +31,7 @@ export default function CreateWorkOrder({ loggedInUser }) {
   useEffect(() => {
     getCarLifts().then(setCarLifts);
   }, []);
-  
+
   useEffect(() => {
     getCars().then(setCars);
   }, []);
@@ -66,7 +68,7 @@ export default function CreateWorkOrder({ loggedInUser }) {
               >{`Bay${cl.id} - ${cl.type}`}</option>
             ))}
           </Input>
-            </FormGroup>
+        </FormGroup>
         <FormGroup>
           <Label>Car</Label>
           <Input
@@ -84,7 +86,15 @@ export default function CreateWorkOrder({ loggedInUser }) {
               >{`${c.make} - ${c.model}`}</option>
             ))}
           </Input>
-        </FormGroup>
+          </FormGroup>
+          <FormGroup>
+            <Label>Date</Label>
+            <Input
+              type="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+            />
+          </FormGroup>
         <Button onClick={handleSubmit} color="primary">
           Submit
         </Button>
