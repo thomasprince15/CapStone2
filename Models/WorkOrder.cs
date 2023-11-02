@@ -3,7 +3,7 @@ namespace CapStone2.Models;
 public class WorkOrder
 {
     public int Id { get; set; }
-    public int? ProfileId { get; set; }
+    public int UserProfileId { get; set; }
     public UserProfile UserProfile { get; set; }
     public int CarId { get; set; }
     public Car Car { get; set; }

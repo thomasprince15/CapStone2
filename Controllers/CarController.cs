@@ -4,6 +4,7 @@ using CapStone2.Data;
 using Microsoft.EntityFrameworkCore;
 using CapStone2.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Security.Claims;
 
 namespace CapStone2.Controllers;
 
@@ -22,7 +23,11 @@ public class CarController : ControllerBase
     [Authorize]
      public IActionResult Get()
     {
-        return Ok(_dbContext.Cars.ToList());
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var profile = _dbContext.UserProfiles.SingleOrDefault(up => up.IdentityUserId == userId);
+        var cars = _dbContext.Cars.Where(c => c.UserProfile.Id == profile.Id);
+
+        return Ok(cars.ToList());
     }
 
     [HttpGet("{id}")]
@@ -48,6 +53,9 @@ public class CarController : ControllerBase
     [Authorize]
     public IActionResult CreateCar(Car car)
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var profile = _dbContext.UserProfiles.SingleOrDefault(up => up.IdentityUserId == userId);
+        car.UserProfileId = profile.Id;
         _dbContext.Cars.Add(car);
         _dbContext.SaveChanges();
         return Created($"/api/cars/{car.Id}", car);

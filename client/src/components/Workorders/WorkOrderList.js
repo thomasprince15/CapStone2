@@ -6,14 +6,14 @@ import { deleteWorkOrder, getWorkOrders } from "../../managers/WorkOrderManager"
 export default function WorkOrderList({ loggedInUser }) {
     const [workOrders, setWorkOrders] = useState([]);
     const navigate = useNavigate();
-
+    
     const getAllWorkOrders = () => {
         getWorkOrders().then(setWorkOrders);
     };
 
     useEffect(() => {
         getAllWorkOrders();
-    });
+    },[]);
 
     const deleteThisWorkOrder = (id) => {
         // Send an HTTP DELETE request to delete the work order
@@ -26,7 +26,7 @@ export default function WorkOrderList({ loggedInUser }) {
     return (
         <>
             <h2>Work Orders</h2>
-            <Link to="/workorders/create">Work Order</Link>
+            <Link to="/workorders/create">New Work Order</Link>
             <Table>
                 <thead>
                     <tr>
@@ -44,7 +44,7 @@ export default function WorkOrderList({ loggedInUser }) {
                             <td>{wo.car.make}</td>
                             <td>{wo.car.model}</td>
                             <td>{wo.description}</td>
-                            <td>{new Date(wo.dayNeeded).toLocaleDateString()}</td>
+                            <td>{wo.dayNeeded}</td>
                             <td>
                             <Button onClick={() => { 
                                 navigate(`/workorders/${wo.id}`) 
